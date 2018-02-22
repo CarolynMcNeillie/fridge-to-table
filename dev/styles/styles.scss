@@ -1,0 +1,39 @@
+body {
+    background: #cbe1e9;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 62.5%;
+    color: #454540;
+}
+
+form {
+    display: block;
+    margin: 150px;
+    padding: 50px;
+    border-radius: 10px;
+    background: #fefefc;
+    box-shadow: 0 0 50px rgba(133, 132, 130, 0.753);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+input,
+select {
+    display: block;
+    margin: 10px 0px 30px;
+    padding: 10px;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+    color: #9b9b92;
+}
+
+input[type="submit"] {
+    border: 0;
+    background-color: #cbe1e9;
+    color: #454540;
+    &:hover {
+        background-color: #454540;
+        color: #fefefc;
+    }
+}
