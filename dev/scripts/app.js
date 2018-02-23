@@ -14,6 +14,7 @@ var config = {
 firebase.initializeApp(config);
 
 
+
 class App extends React.Component {
     constructor() {
 
@@ -63,16 +64,33 @@ class App extends React.Component {
 
   addItem(e) {
     e.preventDefault();
-    const inventoryState = Array.from(this.state.inventory);
-    inventoryState.push(this.state);
+    const foodItem = {
+      foodItem: this.state.foodItem,
+      foodCategory: this.state.foodCategory,
+      purchasedDate: this.state.purchasedDate,
+      eatBy: this.state.eatBy
+    };
+
+    const dbRef = firebase.database().ref();
+    dbRef.push(foodItem);
+
     this.setState({
-      inventory: inventoryState,
       foodItem: '',
       foodCategory: 'fruit',
       purchasedDate: 'Today',
       eatBy: ''
     });
   }
+
+//   const inventoryState = Array.from(this.state.inventory);
+//   inventoryState.push(this.state);
+//     this.setState({
+//   inventory: inventoryState,
+//   foodItem: '',
+//   foodCategory: 'fruit',
+//   purchasedDate: 'Today',
+//   eatBy: ''
+// });
 
   removeItem(index) {
     const inventoryState = Array.from(this.state.inventory);
