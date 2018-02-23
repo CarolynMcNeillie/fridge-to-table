@@ -24,24 +24,7 @@ class App extends React.Component {
         foodCategory: 'fruit',
         purchasedDate: 'Today',
         eatBy: '',
-        inventory: [{
-          foodItem: 'Apples',
-          foodCategory: 'Fruit',
-          purchasedDate: 'Today',
-          eatBy: '1 week',
-          },
-          {
-            foodItem: 'Pears',
-            foodCategory: 'Fruit',
-            purchasedDate: 'Today',
-            eatBy: '2 weeks',
-          },
-          {
-            foodItem: 'Salmon',
-            foodCategory: 'Fruit',
-            purchasedDate: 'Today',
-            eatBy: '3 days',
-          },
+        inventory: [
         ]
       };
 
@@ -60,6 +43,21 @@ class App extends React.Component {
   }
   
   componentDidMount() {
+    const dbRef = firebase.database().ref();
+
+    dbRef.on('value', (firebaseData) => {
+      const itemsArray = [];
+      const itemsData = firebaseData.val();
+
+      for(let itemKey in itemsData){
+        itemsArray.push(itemsData[itemKey])
+      }
+
+      this.setState({
+        inventory: itemsArray,
+      })
+
+    })
   }
 
   addItem(e) {
@@ -81,16 +79,6 @@ class App extends React.Component {
       eatBy: ''
     });
   }
-
-//   const inventoryState = Array.from(this.state.inventory);
-//   inventoryState.push(this.state);
-//     this.setState({
-//   inventory: inventoryState,
-//   foodItem: '',
-//   foodCategory: 'fruit',
-//   purchasedDate: 'Today',
-//   eatBy: ''
-// });
 
   removeItem(index) {
     const inventoryState = Array.from(this.state.inventory);
@@ -115,10 +103,10 @@ class App extends React.Component {
             <option value="vegetable">Vegetable</option>
             <option value="meat">Meat</option>
             <option value="fish">Fish</option>
-            <option value="milk">Milk</option>
+            <option value="dairy">Dairy</option>
             <option value="frozen">Frozen</option>
             <option value="canned">Canned</option>
-            <option value="grain">Grain</option>
+            <option value="bread">Bread</option>
             <option value="pantry">Pantry</option>
             <option value="other">Other</option>
           </select> 
