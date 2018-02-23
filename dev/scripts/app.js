@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import FoodItem from './foodItem';
+import moment from 'moment';
 
 // Initialize Firebase
 var config = {
@@ -13,16 +14,29 @@ var config = {
 };
 firebase.initializeApp(config);
 
-
+//Define how dates display on the front end. (Thanks moment.js!)
+moment.updateLocale('en', {
+  calendar: {
+    lastDay: '[Yesterday]',
+    sameDay: '[Today]',
+    nextDay: '[Tomorrow]',
+    lastWeek: '[Last] dddd',
+    nextWeek: 'dddd',
+    sameElse: 'MMMM DD, YYYY'
+  }
+});
 
 class App extends React.Component {
     constructor() {
 
       super();
+      
+      const today = moment()
+
       this.state = {
         foodItem: '',
         foodCategory: 'fruit',
-        purchasedDate: 'Today',
+        purchasedDate: today,
         eatBy: '',
         inventory: [
         ]
@@ -31,8 +45,7 @@ class App extends React.Component {
       this.handleChange = this.handleChange.bind(this);
       this.addItem = this.addItem.bind(this);
       this.removeItem = this.removeItem.bind(this);
-      // this.toggleEaten = this.toggleEaten.bind(this);
-      // this.toggleRotten = this.toggleRotten.bind(this);
+
 
     }
 
@@ -63,6 +76,7 @@ class App extends React.Component {
 
   addItem(e) {
     e.preventDefault();
+
     const foodItem = {
       foodItem: this.state.foodItem,
       foodCategory: this.state.foodCategory,
@@ -113,7 +127,7 @@ class App extends React.Component {
           </select> 
 
           <label htmlFor="purchasedDate">Date Purchased</label>
-          <input type="text" value={this.state.purchasedDate}name="purchasedDate" onChange={this.handleChange} />
+          <input type="text" value={moment(this.state.purchasedDate).calendar()} name="purchasedDate" onChange={this.handleChange} />
 
           <label htmlFor="eatBy">Eat by</label>
           <input type="text" value={this.state.eatBy} name="eatBy" onChange={this.handleChange} />

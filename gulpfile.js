@@ -9,6 +9,10 @@ const notify = require('gulp-notify');
 const sass = require('gulp-sass');
 const plumber = require('gulp-plumber');
 const concat = require('gulp-concat');
+const moment = require('moment');
+require("moment/min/locales.min");
+moment.locale('cs');
+console.log(moment.locale()); // cs
 
 gulp.task('styles', () => {
 	return gulp.src('./dev/styles/**/*.scss')
