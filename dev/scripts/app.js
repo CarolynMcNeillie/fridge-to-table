@@ -31,6 +31,8 @@ class App extends React.Component {
       this.handleChange = this.handleChange.bind(this);
       this.addItem = this.addItem.bind(this);
       this.removeItem = this.removeItem.bind(this);
+      // this.toggleEaten = this.toggleEaten.bind(this);
+      // this.toggleRotten = this.toggleRotten.bind(this);
 
     }
 
@@ -80,7 +82,8 @@ class App extends React.Component {
   }
 
   removeItem(key) {
-    const dbRef = firebase.database().ref('Drumgolds/inventory/key');
+    const dbRef = firebase.database().ref(`Drumgolds/inventory/${key}`);
+    console.log(dbRef)
     dbRef.remove();
 
     }
@@ -129,5 +132,15 @@ class App extends React.Component {
     )
   }
 }
+
+// const FoodItem = (props) => {
+//   return (
+//     <li>
+//       <button onClick={() => props.remove(props.itemIndex)}>×</button>
+//       <span className="food">{props.data.foodItem}</span>
+//       — Eat within {props.data.eatBy}
+//     </li>
+//   )
+// }
 
 ReactDOM.render(<App />, document.getElementById('app'));
