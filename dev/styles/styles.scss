@@ -1,4 +1,4 @@
-@import "setup";
+    @import "setup";
 body {
     background: #cbe1e9;
     font-family: 'Montserrat', sans-serif;
@@ -30,59 +30,67 @@ form {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-}
-
-input,
-select {
-    display: block;
-    margin: 10px 0px 30px;
-    padding: 10px;
-    text-transform: none;
-    letter-spacing: 0;
-    font-weight: 400;
-    color: #9b9b92;
-}
-
-input[type="submit"] {
-    border: 0;
-    background-color: #cbe1e9;
-    color: #454540;
-    &:hover {
-        background-color: #454540;
-        color: #fefefc;
+    p {
+        margin: 0;
     }
-}
-
-button {
-    width: 40px;
-    height: 40px;
-    border: 0;
-    margin-right: 15px;
-    background-color: #454540;
-    color: white;
-    font-size: 1.25rem;
-    transition: all 0.4s ease-out;
-    &:hover,
-    &:focus {
-        background: #fff;
+    .DayPicker-Month {
+        margin: 0;
+        position: relative;
+    }
+    .DayPicker-NavButton {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    input,
+    select {
+        display: block;
+        margin: 10px 0px 30px;
+        padding: 10px;
+        text-transform: none;
+        letter-spacing: 0;
+        font-weight: 400;
+        color: #9b9b92;
+    }
+    input[type="submit"] {
+        border: 0;
+        background-color: #cbe1e9;
         color: #454540;
+        padding: 10px 50px;
+        transition: all 0.4s ease-out;
+        &:hover {
+            background-color: #454540;
+            color: #fefefc;
+        }
     }
-}
-
-ul {
-    text-align: left;
-    list-style-type: none;
-    font-weight: 400;
-    margin: 0px 150px 0px 150px;
-    padding: 0;
-}
-
-li {
-    padding: 15px;
-    border-bottom: 1px solid white;
-    .food {
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+    button {
+        width: 40px;
+        height: 40px;
+        border: 0;
+        margin-right: 15px;
+        background-color: #454540;
+        color: white;
+        font-size: 1.25rem;
+        transition: all 0.4s ease-out;
+        &:hover,
+        &:focus {
+            background: #fff;
+            color: #454540;
+        }
     }
-}
+    ul {
+        text-align: left;
+        list-style-type: none;
+        font-weight: 400;
+        margin: 0px 150px 0px 150px;
+        padding: 0;
+    }
+    li {
+        padding: 15px;
+        border-bottom: 1px solid white;
+        .food {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    }

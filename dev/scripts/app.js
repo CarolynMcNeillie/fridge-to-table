@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import FoodItem from './foodItem';
 import moment from 'moment';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
 
 // Initialize Firebase
 var config = {
@@ -31,7 +32,7 @@ class App extends React.Component {
 
       super();
       
-      const today = moment()
+      const today = moment().format('YYYYMMDD')
 
       this.state = {
         foodItem: '',
@@ -45,15 +46,26 @@ class App extends React.Component {
       this.handleChange = this.handleChange.bind(this);
       this.addItem = this.addItem.bind(this);
       this.removeItem = this.removeItem.bind(this);
+      this.handleDateChange = this.handleDateChange.bind(this);
 
 
     }
 
+  handleDateChange(date) {
+    const formattedDate = moment(date).format('YYYYMMDD');
+    console.log(formattedDate);
+    this.setState({
+      eatBy: formattedDate
+    })
+  }
+    
   handleChange(e) {
+
     this.setState({
       [e.target.name]: e.target.value
     })
   }
+
   
   componentDidMount() {
     const dbRef = firebase.database().ref('Drumgolds/inventory');
@@ -97,7 +109,6 @@ class App extends React.Component {
 
   removeItem(key) {
     const dbRef = firebase.database().ref(`Drumgolds/inventory/${key}`);
-    console.log(dbRef)
     dbRef.remove();
 
     }
@@ -126,11 +137,16 @@ class App extends React.Component {
             <option value="other">Other</option>
           </select> 
 
+          <p>Eat by</p>
+          <DayPickerInput value={this.state.eatBy} name="eatBy" onDayChange={day => this.handleDateChange(day)}/> 
+
+          {/* <br/>
+
           <label htmlFor="purchasedDate">Date Purchased</label>
           <input type="text" value={moment(this.state.purchasedDate).calendar()} name="purchasedDate" onChange={this.handleChange} />
 
           <label htmlFor="eatBy">Eat by</label>
-          <input type="text" value={this.state.eatBy} name="eatBy" onChange={this.handleChange} />
+          <input type="text" value={this.state.eatBy} name="eatBy" onChange={this.handleChange} /> */}
 
           <input type="submit" value="Add" />
         </form>
