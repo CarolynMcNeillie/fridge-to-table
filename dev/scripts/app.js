@@ -31,8 +31,6 @@ class App extends React.Component {
       this.handleChange = this.handleChange.bind(this);
       this.addItem = this.addItem.bind(this);
       this.removeItem = this.removeItem.bind(this);
-      // this.toggleEaten = this.toggleEaten.bind(this);
-      // this.toggleRotten = this.toggleRotten.bind(this);
 
     }
 
@@ -43,14 +41,15 @@ class App extends React.Component {
   }
   
   componentDidMount() {
-    const dbRef = firebase.database().ref();
+    const dbRef = firebase.database().ref('Drumgolds/inventory');
 
     dbRef.on('value', (firebaseData) => {
       const itemsArray = [];
       const itemsData = firebaseData.val();
 
       for(let itemKey in itemsData){
-        itemsArray.push(itemsData[itemKey])
+        itemsData[itemKey].key = itemKey;
+        itemsArray.push(itemsData[itemKey]);
       }
 
       this.setState({
@@ -69,7 +68,7 @@ class App extends React.Component {
       eatBy: this.state.eatBy
     };
 
-    const dbRef = firebase.database().ref();
+    const dbRef = firebase.database().ref('Drumgolds/inventory');
     dbRef.push(foodItem);
 
     this.setState({
@@ -80,13 +79,12 @@ class App extends React.Component {
     });
   }
 
-  removeItem(index) {
-    const inventoryState = Array.from(this.state.inventory);
-    inventoryState.splice(index, 1);
-    this.setState({
-      inventory: inventoryState
-    });
-  };
+  removeItem(key) {
+    const dbRef = firebase.database().ref('Drumgolds/inventory/key');
+    dbRef.remove();
+
+    }
+
 
   render() {
     return (
@@ -122,8 +120,8 @@ class App extends React.Component {
           
         <h2>Inventory</h2> 
         <ul>
-          {this.state.inventory.map((item, i) => {
-            return <FoodItem data={item} key={`item-${i}`} remove={this.removeItem} itemIndex={i} />
+          {this.state.inventory.map((item) => {
+            return <FoodItem data={item} key={item.key} remove={this.removeItem} />
           })}
         </ul>
 
@@ -131,15 +129,5 @@ class App extends React.Component {
     )
   }
 }
-
-// const FoodItem = (props) => {
-//   return (
-//     <li>
-//       <button onClick={() => props.remove(props.itemIndex)}>×</button>
-//       <span className="food">{props.data.foodItem}</span>
-//       — Eat within {props.data.eatBy}
-//     </li>
-//   )
-// }
 
 ReactDOM.render(<App />, document.getElementById('app'));
