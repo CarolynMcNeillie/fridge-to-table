@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import FoodItem from './foodItem';
 import moment from 'moment';
+import FoodItem from './foodItem';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
+import AddToInventory from './addToInventory';
 
 // Initialize Firebase
 var config = {
@@ -31,7 +32,7 @@ class App extends React.Component {
     constructor() {
 
       super();
-      
+
       const today = moment().format('YYYYMMDD')
 
       this.state = {
@@ -44,48 +45,25 @@ class App extends React.Component {
       };
 
       this.handleChange = this.handleChange.bind(this);
+      this.handleDateChange = this.handleDateChange.bind(this);
       this.addItem = this.addItem.bind(this);
       this.removeItem = this.removeItem.bind(this);
-      this.handleDateChange = this.handleDateChange.bind(this);
-
 
     }
 
-  handleDateChange(date) {
-    const formattedDate = moment(date).format('YYYYMMDD');
-    console.log(formattedDate);
-    this.setState({
-      eatBy: formattedDate
-    })
-  }
-    
   handleChange(e) {
-
     this.setState({
       [e.target.name]: e.target.value
     })
   }
-
   
-  componentDidMount() {
-    const dbRef = firebase.database().ref('Drumgolds/inventory');
-
-    dbRef.on('value', (firebaseData) => {
-      const itemsArray = [];
-      const itemsData = firebaseData.val();
-
-      for(let itemKey in itemsData){
-        itemsData[itemKey].key = itemKey;
-        itemsArray.push(itemsData[itemKey]);
-      }
-
-      this.setState({
-        inventory: itemsArray,
-      })
-
+  handleDateChange(date) {
+    const formattedDate = moment(date).format('YYYYMMDD');
+    this.setState({ 
+      eatBy: formattedDate
     })
   }
-
+    
   addItem(e) {
     e.preventDefault();
 
@@ -111,50 +89,38 @@ class App extends React.Component {
     const dbRef = firebase.database().ref(`Drumgolds/inventory/${key}`);
     dbRef.remove();
 
-    }
+  }
+  
+  componentDidMount() {
+    const dbRef = firebase.database().ref('Drumgolds/inventory');
 
+    dbRef.on('value', (firebaseData) => {
+      const itemsArray = [];
+      const itemsData = firebaseData.val();
+
+      for(let itemKey in itemsData){
+        itemsData[itemKey].key = itemKey;
+        itemsArray.push(itemsData[itemKey]);
+      }
+
+      this.setState({
+        inventory: itemsArray,
+      })
+
+    })
+  }
 
   render() {
+
     return (
       <div>
-        <h1>Fridge to Table</h1>
-        <form onSubmit={this.addItem}>
-
-          <label htmlFor="foodItem">Food Item</label>
-          <input type="text" value={this.state.foodItem} name="foodItem" onChange={this.handleChange} />
-
-          <label htmlFor="foodCategory">Category</label>
-          <select name="foodCategory" value={this.state.foodCategory} onChange={this.handleChange}>
-            <option value="fruit">Fruit</option>
-            <option value="vegetable">Vegetable</option>
-            <option value="meat">Meat</option>
-            <option value="fish">Fish</option>
-            <option value="dairy">Dairy</option>
-            <option value="frozen">Frozen</option>
-            <option value="canned">Canned</option>
-            <option value="bread">Bread</option>
-            <option value="pantry">Pantry</option>
-            <option value="other">Other</option>
-          </select> 
-
-          <p>Eat by</p>
-          <DayPickerInput value={this.state.eatBy} name="eatBy" onDayChange={day => this.handleDateChange(day)}/> 
-
-          {/* <br/>
-
-          <label htmlFor="purchasedDate">Date Purchased</label>
-          <input type="text" value={moment(this.state.purchasedDate).calendar()} name="purchasedDate" onChange={this.handleChange} />
-
-          <label htmlFor="eatBy">Eat by</label>
-          <input type="text" value={this.state.eatBy} name="eatBy" onChange={this.handleChange} /> */}
-
-          <input type="submit" value="Add" />
-        </form>
+        <h1> Fridge to Table </h1>
+        <AddToInventory data={this.state} handleChange={this.handleChange} handleDateChange={this.handleDateChange} addItem={this.addItem} />
           
         <h2>Inventory</h2> 
         <ul>
           {this.state.inventory.map((item) => {
-            return <FoodItem data={item} key={item.key} remove={this.removeItem} />
+            return <FoodItem data={item} key={item.key} removeItem={this.removeItem} />
           })}
         </ul>
 
@@ -162,15 +128,5 @@ class App extends React.Component {
     )
   }
 }
-
-// const FoodItem = (props) => {
-//   return (
-//     <li>
-//       <button onClick={() => props.remove(props.itemIndex)}>×</button>
-//       <span className="food">{props.data.foodItem}</span>
-//       — Eat within {props.data.eatBy}
-//     </li>
-//   )
-// }
 
 ReactDOM.render(<App />, document.getElementById('app'));
