@@ -39,6 +39,7 @@ class App extends React.Component {
       this.state = {
         foodItem: '',
         foodCategory: 'fruit',
+        foodCategoryArray: ['Fruits', 'Vegetables', 'Meat', 'Fish', 'Dairy', 'Frozen Food', 'Canned Food', 'Bread', 'Pantry Items', 'Other'],
         purchasedDate: today,
         eatBy: '',
         inventory: [
@@ -125,6 +126,16 @@ class App extends React.Component {
         <AddToInventory data={this.state} handleChange={this.handleChange} handleDateChange={this.handleDateChange} addItem={this.addItem} />
           
         <h2>Inventory</h2> 
+
+        {/* <form> */}
+          {/* <p>Filter</p>
+          
+            <input type="radio"
+            name="foodCategory" value="{this.state.foodCategory}"/>
+          <label for="{this.state.foodCategory}">{this.state.foodCategory}</label>
+
+        </form> */}
+
         <ul>
           {this.state.inventory.map((item) => {
             return <FoodItem data={item} key={item.key} removeItem={this.removeItem} />
