@@ -5,6 +5,7 @@ import FoodItem from './foodItem';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import AddToInventory from './addToInventory';
 import GroceryListItem from './groceryListItem';
+import FoodCategories from './foodCategories';
 
 // Initialize Firebase
 var config = {
@@ -38,9 +39,10 @@ class App extends React.Component {
 
       this.state = {
         foodItem: '',
-        foodCategory: 'fruit',
+        foodCategory: 'Fruits',
         purchasedDate: today,
         eatBy: '',
+        filterBy: 'All',
         inventory: [
         ]
       };
@@ -107,8 +109,6 @@ class App extends React.Component {
         return a.eatBy - b.eatBy;
       });
 
-      console.log(itemsArray);
-
       this.setState({
         inventory: itemsArray,
       })
@@ -121,15 +121,34 @@ class App extends React.Component {
     return (
       <div>
         <h1> Fridge to Table </h1>
-        <AddToInventory data={this.state} handleChange={this.handleChange} handleDateChange={this.handleDateChange} addItem={this.addItem} displayDropdown={this.displayDropdown} />
           
         <h2>Inventory</h2> 
 
+        <AddToInventory data={this.state} handleChange={this.handleChange} handleDateChange={this.handleDateChange} addItem={this.addItem} displayDropdown={this.displayDropdown} />
+
+        <form className="filterBy">
+          <h3>Filter By</h3>
+
+          <select name="filterBy" onChange={this.handleChange} >
+
+          <option value="All" key='filter-All' >All</option>
+          
+          {FoodCategories.map((category, i) => {
+              return <option value={category} key={`filter-${i}`} >{category}</option>
+          })}
+
+          </select>
+          
+          </form>
+
+
         <ul>
           {this.state.inventory.map((item) => {
-            return <FoodItem data={item} key={item.key} removeItem={this.removeItem} />
+            return <FoodItem data={item} filterBy={this.state.filterBy} key={item.key} removeItem={this.removeItem} />
           })}
         </ul>
+          
+        <h2>Grocery List</h2> 
 
           <GroceryListItem />
 

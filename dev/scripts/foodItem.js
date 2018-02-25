@@ -2,7 +2,6 @@ import React from 'react';
 import moment from 'moment';
 
 const FoodItem = (props) => {
-  
 
   const relativeDate = moment(props.data.eatBy).fromNow();
   const daysFromNow = moment(props.data.eatBy, 'YYYYMMDD').calendar();
@@ -23,16 +22,21 @@ const FoodItem = (props) => {
     liClass='eatSoon'
     }
 
+  if (props.data.foodCategory === props.filterBy || props.filterBy === 'All') {
   return (
+
     <li className={oldFood === undefined ? null : liClass}>
     
       <button onClick={() => props.removeItem(props.data.key)}>×</button>
       <span className="food">{props.data.foodItem}</span>
-      -  {liClass === 'oldFood' ? `Ready for the compost ${relativeDate}` : `Eat by ${daysFromNow}`}
-      
-      
+      -  {liClass === 'oldFood' ? `Ready for the compost ${relativeDate}` : `Eat by ${daysFromNow}`}  
     </li>
-  );
-};
+
+
+  )
+  } else {
+  return ( null )
+}
+}
 
 export default FoodItem;
