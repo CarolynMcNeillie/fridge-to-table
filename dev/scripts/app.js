@@ -39,7 +39,6 @@ class App extends React.Component {
       this.state = {
         foodItem: '',
         foodCategory: 'fruit',
-        foodCategoryArray: ['Fruits', 'Vegetables', 'Meat', 'Fish', 'Dairy', 'Frozen Food', 'Canned Food', 'Bread', 'Pantry Items', 'Other'],
         purchasedDate: today,
         eatBy: '',
         inventory: [
@@ -50,18 +49,7 @@ class App extends React.Component {
       this.handleDateChange = this.handleDateChange.bind(this);
       this.addItem = this.addItem.bind(this);
       this.removeItem = this.removeItem.bind(this);
-      this.displayDropdown = this.displayDropdown.bind(this);
-
     }
-
-  displayDropdown() {
-
-    for (let item in this.foodCategoryArray){
-      return (
-        <option value={this.foodCategoryArray.item}>{this.foodCategoryArray.item}</option>
-      )
-    }
-  }
 
   handleChange(e) {
     this.setState({

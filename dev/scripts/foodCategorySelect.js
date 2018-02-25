@@ -1,24 +1,27 @@
 import React from 'react';
+import FoodCategories from './foodCategories';
 
-const FoodCategorySelect = (props) => {
+class FoodCategorySelect extends React.Component {
+
+ render(){
 
   return(
-    <select name = "foodCategory" value = { props.data.foodCategory } onChange = { props.handleChange } >
-      {/* <option value="fruit">Fruit</option>
-      <option value="vegetable">Vegetable</option>
-      <option value="meat">Meat</option>
-      <option value="fish">Fish</option>
-      <option value="dairy">Dairy</option>
-      <option value="frozen">Frozen</option>
-      <option value="canned">Canned</option>
-      <option value="bread">Bread</option>
-      <option value="pantry">Pantry</option>
-      <option value="other">Other</option> */}
 
-      <displayDropdown />
+    <select name = "foodCategory" value = { this.props.data.foodCategory } onChange = { this.props.handleChange } >
+
+      {FoodCategories.map((category, i) => {
+        return (
+          <option value={category} key={i} >{category}</option>
+        )
+      })
+      }
+
+
 
       </select >
+
   )
+}
 
 };
 
