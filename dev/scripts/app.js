@@ -50,8 +50,18 @@ class App extends React.Component {
       this.handleDateChange = this.handleDateChange.bind(this);
       this.addItem = this.addItem.bind(this);
       this.removeItem = this.removeItem.bind(this);
+      this.displayDropdown = this.displayDropdown.bind(this);
 
     }
+
+  displayDropdown() {
+
+    for (let item in this.foodCategoryArray){
+      return (
+        <option value={this.foodCategoryArray.item}>{this.foodCategoryArray.item}</option>
+      )
+    }
+  }
 
   handleChange(e) {
     this.setState({
@@ -123,18 +133,9 @@ class App extends React.Component {
     return (
       <div>
         <h1> Fridge to Table </h1>
-        <AddToInventory data={this.state} handleChange={this.handleChange} handleDateChange={this.handleDateChange} addItem={this.addItem} />
+        <AddToInventory data={this.state} handleChange={this.handleChange} handleDateChange={this.handleDateChange} addItem={this.addItem} displayDropdown={this.displayDropdown} />
           
         <h2>Inventory</h2> 
-
-        {/* <form> */}
-          {/* <p>Filter</p>
-          
-            <input type="radio"
-            name="foodCategory" value="{this.state.foodCategory}"/>
-          <label for="{this.state.foodCategory}">{this.state.foodCategory}</label>
-
-        </form> */}
 
         <ul>
           {this.state.inventory.map((item) => {
