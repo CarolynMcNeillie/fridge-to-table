@@ -4,6 +4,7 @@ import moment from 'moment';
 import FoodItem from './foodItem';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import AddToInventory from './addToInventory';
+import GroceryListItem from './groceryListItem';
 
 // Initialize Firebase
 var config = {
@@ -24,7 +25,7 @@ moment.updateLocale('en', {
     nextDay: '[Tomorrow]',
     lastWeek: '[Last] dddd',
     nextWeek: 'dddd',
-    sameElse: 'MMMM DD, YYYY'
+    sameElse: 'MMMM DD YYYY'
   }
 });
 
@@ -103,6 +104,12 @@ class App extends React.Component {
         itemsArray.push(itemsData[itemKey]);
       }
 
+      itemsArray.sort(function (a, b) {
+        return a.eatBy - b.eatBy;
+      });
+
+      console.log(itemsArray);
+
       this.setState({
         inventory: itemsArray,
       })
@@ -123,6 +130,8 @@ class App extends React.Component {
             return <FoodItem data={item} key={item.key} removeItem={this.removeItem} />
           })}
         </ul>
+
+          <GroceryListItem />
 
       </div>
     )

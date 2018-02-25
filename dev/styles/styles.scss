@@ -1,4 +1,4 @@
-    @import "setup";
+@import "setup";
 body {
     background: #cbe1e9;
     font-family: 'Montserrat', sans-serif;
@@ -33,6 +33,9 @@ form {
     p {
         margin: 0;
     }
+    .DayPickerInput-OverlayWrapper {
+        background: red
+    }
     .DayPicker-Month {
         margin: 0;
         position: relative;
@@ -63,34 +66,52 @@ form {
             color: #fefefc;
         }
     }
-    button {
-        width: 40px;
-        height: 40px;
-        border: 0;
-        margin-right: 15px;
-        background-color: #454540;
-        color: white;
-        font-size: 1.25rem;
-        transition: all 0.4s ease-out;
-        &:hover,
-        &:focus {
-            background: #fff;
-            color: #454540;
-        }
+}
+
+ul {
+    text-align: left;
+    display: grid;
+    list-style: none;
+    font-weight: 400;
+    margin: 0px 150px 0px 150px;
+    padding: 0;
+}
+
+li {
+    padding: 15px;
+    border-bottom: 1px solid #9b9b92;
+    background-color: #ffffff99;
+    order: 1;
+    .food {
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
-    ul {
-        text-align: left;
-        list-style-type: none;
-        font-weight: 400;
-        margin: 0px 150px 0px 150px;
-        padding: 0;
+}
+
+.oldFood {
+    background-color: rgba(85, 107, 47);
+    color: #fff;
+    order: 3;
+}
+
+.eatSoon {
+    background-color: #ffffff;
+    order: 0;
+}
+
+button {
+    width: 40px;
+    height: 40px;
+    border: 0;
+    margin-right: 15px;
+    background-color: #454540;
+    color: white;
+    font-size: 1.25rem;
+    transition: all 0.4s ease-out;
+    &:hover,
+    &:focus {
+        background: #fff;
+        color: #454540;
     }
-    li {
-        padding: 15px;
-        border-bottom: 1px solid white;
-        .food {
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-    }
+}
