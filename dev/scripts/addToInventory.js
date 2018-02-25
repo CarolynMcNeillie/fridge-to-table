@@ -1,6 +1,11 @@
 import React from 'react';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
+import DayPicker from 'react-day-picker';
 import FoodCategorySelect from './foodCategorySelect';
+import moment from 'moment';
+
+const thisMonth = moment().format(`YYYY, M`);
+console.log(thisMonth)
 
 const AddToInventory = (props) => {
 
@@ -13,10 +18,10 @@ const AddToInventory = (props) => {
 
       <label htmlFor="foodCategory">Category</label>
 
-      <FoodCategorySelect data={props.data} handleChange={props.handleChange}/>
-
+      <FoodCategorySelect data={props.data} handleChange={props.handleChange}/> 
+    
       <p>Eat by</p>
-      <DayPickerInput value={props.data.eatBy} name="eatBy" onDayChange={day => props.handleDateChange(day)} />
+      <DayPickerInput showOutsideDays value={props.data.eatBy} name="eatBy" onDayChange={day => props.handleDateChange(day)} />
 
       <input type="submit" value="Add" />
     </form>

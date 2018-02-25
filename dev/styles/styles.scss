@@ -1,7 +1,6 @@
 @import "setup";
 body {
-    // background: #cbe1e9;
-    background-color: sienna;
+    background: #cbe1e9;
     font-family: 'Montserrat', sans-serif;
     font-size: 62.5%;
     color: #454540;
@@ -34,17 +33,16 @@ form {
     p {
         margin: 0;
     }
-    .DayPickerInput-OverlayWrapper {
-        background: red
+    // .DayPicker-Month {
+    //     margin: 0;
+    //     position: relative;
+    // }
+    .DayPicker-Caption div {
+        font-size: 0.75rem;
     }
-    .DayPicker-Month {
-        margin: 0;
-        position: relative;
-    }
-    .DayPicker-NavButton {
-        position: absolute;
-        top: 0;
-        right: 0;
+    .DayPicker-Day--today {
+        background-color: #454540;
+        color: #fff;
     }
     input,
     select {
@@ -91,7 +89,7 @@ li {
 }
 
 .oldFood {
-    background-color: rgba(85, 107, 47);
+    background-color: palevioletred;
     color: #fff;
     order: 3;
 }
