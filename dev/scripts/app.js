@@ -7,6 +7,7 @@ import DayPickerInput from 'react-day-picker/DayPickerInput';
 import AddToInventory from './addToInventory';
 import AddToGroceryList from './addToGroceryList';
 import GroceryListItem from './groceryListItem';
+import Modal from './modal'
 
 // Initialize Firebase
 var config = {
@@ -47,7 +48,8 @@ class App extends React.Component {
         inventory: [],
         groceryItem: '',
         groceryCategory: 'Fruits',
-        groceryList: []
+        groceryList: [],
+        isOpen: false
       };
 
       this.handleChange = this.handleChange.bind(this);
@@ -57,7 +59,15 @@ class App extends React.Component {
       this.removeItem = this.removeItem.bind(this);
       this.removeGroceryItem = this.removeGroceryItem.bind(this);
       this.addGroceryItem = this.addGroceryItem.bind(this);
+      this.toggleModal = this.toggleModal.bind(this);
     }
+
+  toggleModal() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
 
   handleChange(e) {
     this.setState({
@@ -65,10 +75,10 @@ class App extends React.Component {
     })
   }
   
+  //The date picker doesn't send an event so it has a special handler
   handleDateChange(date) {
-    const formattedDate = moment(date).format('YYYYMMDD');
     this.setState({ 
-      eatBy: formattedDate
+      eatBy: date
     })
   }
 
@@ -110,8 +120,8 @@ class App extends React.Component {
     });
   }
 
-  removeItem(key, dbRef) {
-    // const dbRef = firebase.database().ref(`Drumgolds/inventory/${key}`);
+  removeItem(key) {
+    const dbRef = firebase.database().ref(`Drumgolds/inventory/${key}`);
     dbRef.remove();
 
   }
@@ -119,6 +129,8 @@ class App extends React.Component {
   removeGroceryItem(key) {
     const dbRef = firebase.database().ref(`Drumgolds/groceryList/${key}`);
     dbRef.remove();
+
+    
 
   }
   
@@ -166,6 +178,18 @@ class App extends React.Component {
 
     return (
       <div>
+
+      <div className="App">
+          <button className="modal-btn" onClick={this.toggleModal}>
+          Open the modal
+        </button>
+
+        <Modal show={this.state.isOpen}
+          onClose={this.toggleModal}>
+          Here's some content for the modal
+        </Modal>
+      </div>
+
         <h1> Fridge to Table </h1>
           
         
@@ -191,7 +215,7 @@ class App extends React.Component {
 
         <ul>
           {this.state.inventory.map((item) => {
-            return <FoodItem data={item} filterBy={this.state.filterBy} key={item.key} removeItem={this.removeItem} dbRef={`firebase.database().ref(Drumgolds/inventory/${key})`} />
+            return <FoodItem data={item} filterBy={this.state.filterBy} key={item.key} removeItem={this.removeItem} toggleModal={this.toggleModal} />
           })}
         </ul>
         

@@ -18,11 +18,11 @@ const AddToInventory = (props) => {
       <label htmlFor="foodCategory">Category</label>
 
 
-        <FoodCategorySelect data={props.data} handleChange={props.handleChange} displayDropdown={props.displayDropdown} /> 
+        <FoodCategorySelect data={props.data} handleChange={props.handleChange} /> 
 
     
       <p>Eat by</p>
-      <DayPickerInput showOutsideDays value={props.data.eatBy} name="eatBy" onDayChange={day => props.handleDateChange(day)} />
+      <DayPickerInput showOutsideDays value={props.data.eatBy} name="eatBy" onDayChange={day => props.handleDateChange(moment(day).format('YYYYMMDD'))} />
 
       <input type="submit" value="Add" />
     </form>
