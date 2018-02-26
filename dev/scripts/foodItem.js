@@ -25,13 +25,24 @@ const FoodItem = (props) => {
   if (props.data.foodCategory === props.filterBy || props.filterBy === 'All') {
   return (
 
-    <li className={oldFood === undefined ? null : liClass}>
+    // <li className={oldFood === undefined ? null : liClass}>
     
-      <button onClick={() => props.removeItem(props.data.key)}>×</button>
-      <span className="food">{props.data.foodItem}</span>
-      -  {liClass === 'oldFood' ? `Ready for the compost ${relativeDate}` : `Eat by ${daysFromNow}`}  
-    </li>
+    //   <button onClick={() => props.removeItem(props.data.key)}>×</button>
+    //   <span className="food">{props.data.foodItem}</span>
+    //   -  {liClass === 'oldFood' ? `Ready for the compost ${relativeDate}` : `Eat by ${daysFromNow}`}  
+    // </li>
 
+    <li className={oldFood === undefined ? null : liClass}>
+
+      <button onClick={() => props.toggleModal(props.data.key, props.data.foodItem, props.data.foodCategory)}>×</button>
+
+      <p>
+      <span className="food">{props.data.foodItem}</span> - 
+       {liClass === 'oldFood' ? `Ready for the compost ${relativeDate}` : `Eat by ${daysFromNow}`}
+       </p>
+
+    </li>
+  
 
   )
   } else {

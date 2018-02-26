@@ -9,10 +9,10 @@ const AddToGroceryList = (props) => {
       <h3>Add to Grocery List</h3>
 
       <label htmlFor="groceryItem">Food Item</label>
-      <input type="text" value={props.data.groceryItem} name="groceryItem" onChange={props.handleChange} />
+      <input type="text" value={props.data.groceryItem} name="groceryItem" onChange={props.handleChange} required/>
 
       <label htmlFor="groceryCategory">Category</label>
-      <select name="groceryCategory" value={props.data.groceryCategory} onChange={props.handleChange}>
+      <select name="groceryCategory" value={props.data.groceryCategory} onChange={props.handleChange} required>
 
         {FoodCategories.map((category, i) => {
           return (

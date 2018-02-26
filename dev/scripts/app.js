@@ -40,6 +40,7 @@ class App extends React.Component {
       const today = moment().format('YYYYMMDD')
 
       this.state = {
+        path: 'Inventory',
         foodItem: '',
         foodCategory: 'Fruits',
         purchasedDate: today,
@@ -49,8 +50,11 @@ class App extends React.Component {
         groceryItem: '',
         groceryCategory: 'Fruits',
         groceryList: [],
-        isOpen: false
-      };
+        isOpen: false,
+        activeItem: '',
+        activeItemName: '',
+        activeCategory: '',
+      }
 
       this.handleChange = this.handleChange.bind(this);
       this.handleDateChange = this.handleDateChange.bind(this);
@@ -62,12 +66,20 @@ class App extends React.Component {
       this.toggleModal = this.toggleModal.bind(this);
     }
 
-  toggleModal() {
+  toggleModal(key, itemName, itemCategory) {
+    this.setState({
+      isOpen: !this.state.isOpen,
+      activeItem: key,
+      activeItemName: itemName,
+      activeCategory: itemCategory
+    });
+  }
+
+  showGroceryModel(key) {
     this.setState({
       isOpen: !this.state.isOpen
     });
   }
-
 
   handleChange(e) {
     this.setState({
@@ -81,6 +93,8 @@ class App extends React.Component {
       eatBy: date
     })
   }
+
+  //Add item to the Inventory
 
   addItem(e) {
     e.preventDefault();
@@ -103,6 +117,7 @@ class App extends React.Component {
     });
   }
     
+  //Add item to the grocery list
   addGroceryItem(e) {
     e.preventDefault();
 
@@ -120,12 +135,14 @@ class App extends React.Component {
     });
   }
 
+  //Remove item from the Inventory
   removeItem(key) {
     const dbRef = firebase.database().ref(`Drumgolds/inventory/${key}`);
     dbRef.remove();
 
   }
 
+  //Remove item from the grocery list
   removeGroceryItem(key) {
     const dbRef = firebase.database().ref(`Drumgolds/groceryList/${key}`);
     dbRef.remove();
@@ -138,6 +155,7 @@ class App extends React.Component {
     const dbRef = firebase.database().ref('Drumgolds/inventory');
     const dbGroceryRef = firebase.database().ref('Drumgolds/groceryList')
 
+    //Updating Inventory list
     dbRef.on('value', (firebaseData) => {
       const itemsArray = [];
       const itemsData = firebaseData.val();
@@ -157,6 +175,7 @@ class App extends React.Component {
 
     })
 
+    //Updating grocery list
     dbGroceryRef.on('value', (firebaseData) => {
       const itemsArray = [];
       const itemsData = firebaseData.val();
@@ -177,26 +196,29 @@ class App extends React.Component {
   render() {
 
     return (
-      <div>
 
       <div className="App">
-          <button className="modal-btn" onClick={this.toggleModal}>
-          Open the modal
-        </button>
+        <header className="navBar">
+          <p><i className="fas fa-bars"></i></p>
+          <h2>Fridge to Table</h2>
+          <p>❤️</p>
+        </header>
 
         <Modal show={this.state.isOpen}
-          onClose={this.toggleModal}>
-          Here's some content for the modal
+          onClose={this.toggleModal} removeItem={this.removeItem} activeItem={this.state.activeItem} activeItemName={this.state.activeItemName} activeCategory={this.state.activeCategory} >
         </Modal>
-      </div>
 
-        <h1> Fridge to Table </h1>
-          
+        <aside className="sidebar">
+          <section className="AddToInventory">
+          <AddToInventory data={this.state} handleChange={this.handleChange} handleDateChange={this.handleDateChange} addItem={this.addItem} />
+          </section>
+
+          <section className="AddToGroceryList">
+          <AddToGroceryList data={this.state} handleChange={this.handleChange} addGroceryItem={this.addGroceryItem} />
+          </section>
+
+        </aside>
         
-        <h2>Inventory</h2> 
-
-        <AddToInventory data={this.state} handleChange={this.handleChange} handleDateChange={this.handleDateChange} addItem={this.addItem} />
-
         <form className="filterBy">
           <h3>Filter By</h3>
 
@@ -212,17 +234,12 @@ class App extends React.Component {
           
           </form>
 
-
         <ul>
           {this.state.inventory.map((item) => {
             return <FoodItem data={item} filterBy={this.state.filterBy} key={item.key} removeItem={this.removeItem} toggleModal={this.toggleModal} />
           })}
         </ul>
-        
 
-        <h2>Grocery List</h2> 
-
-        <AddToGroceryList data={this.state} handleChange={this.handleChange} addGroceryItem={this.addGroceryItem} />
 
         <ul>
           {this.state.groceryList.map((item) => {
