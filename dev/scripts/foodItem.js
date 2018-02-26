@@ -27,7 +27,7 @@ const FoodItem = (props) => {
 
     <li className={oldFood === undefined ? null : liClass}>
     
-      <button onClick={() => props.removeItem(props.data.key)}>×</button>
+      <button onClick={() => props.removeItem(props.data.key, props.dbRef)}>×</button>
       <span className="food">{props.data.foodItem}</span>
       -  {liClass === 'oldFood' ? `Ready for the compost ${relativeDate}` : `Eat by ${daysFromNow}`}  
     </li>

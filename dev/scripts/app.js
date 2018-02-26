@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
+import FoodCategories from './foodCategories';
 import FoodItem from './foodItem';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import AddToInventory from './addToInventory';
+import AddToGroceryList from './addToGroceryList';
 import GroceryListItem from './groceryListItem';
-import FoodCategories from './foodCategories';
 
 // Initialize Firebase
 var config = {
@@ -43,14 +44,19 @@ class App extends React.Component {
         purchasedDate: today,
         eatBy: '',
         filterBy: 'All',
-        inventory: [
-        ]
+        inventory: [],
+        groceryItem: '',
+        groceryCategory: 'Fruits',
+        groceryList: []
       };
 
       this.handleChange = this.handleChange.bind(this);
       this.handleDateChange = this.handleDateChange.bind(this);
       this.addItem = this.addItem.bind(this);
+      this.addGroceryItem = this.addGroceryItem.bind(this);
       this.removeItem = this.removeItem.bind(this);
+      this.removeGroceryItem = this.removeGroceryItem.bind(this);
+      this.addGroceryItem = this.addGroceryItem.bind(this);
     }
 
   handleChange(e) {
@@ -65,7 +71,7 @@ class App extends React.Component {
       eatBy: formattedDate
     })
   }
-    
+
   addItem(e) {
     e.preventDefault();
 
@@ -81,20 +87,44 @@ class App extends React.Component {
 
     this.setState({
       foodItem: '',
-      foodCategory: 'fruit',
+      foodCategory: 'Fruits',
       purchasedDate: 'Today',
       eatBy: ''
     });
   }
+    
+  addGroceryItem(e) {
+    e.preventDefault();
 
-  removeItem(key) {
-    const dbRef = firebase.database().ref(`Drumgolds/inventory/${key}`);
+    const groceryListItem = {
+      groceryItem: this.state.groceryItem,
+      groceryCategory: this.state.groceryCategory,
+    };
+
+    const dbRef = firebase.database().ref('Drumgolds/groceryList');
+    dbRef.push(groceryListItem);
+
+    this.setState({
+      groceryItem: '',
+      groceryCategory: 'Fruits',
+    });
+  }
+
+  removeItem(key, dbRef) {
+    // const dbRef = firebase.database().ref(`Drumgolds/inventory/${key}`);
+    dbRef.remove();
+
+  }
+
+  removeGroceryItem(key) {
+    const dbRef = firebase.database().ref(`Drumgolds/groceryList/${key}`);
     dbRef.remove();
 
   }
   
   componentDidMount() {
     const dbRef = firebase.database().ref('Drumgolds/inventory');
+    const dbGroceryRef = firebase.database().ref('Drumgolds/groceryList')
 
     dbRef.on('value', (firebaseData) => {
       const itemsArray = [];
@@ -114,6 +144,22 @@ class App extends React.Component {
       })
 
     })
+
+    dbGroceryRef.on('value', (firebaseData) => {
+      const itemsArray = [];
+      const itemsData = firebaseData.val();
+
+      for (let itemKey in itemsData) {
+        itemsData[itemKey].key = itemKey;
+        itemsArray.push(itemsData[itemKey]);
+      }
+
+      this.setState({
+        groceryList: itemsArray,
+      })
+
+    })
+
   }
 
   render() {
@@ -122,9 +168,10 @@ class App extends React.Component {
       <div>
         <h1> Fridge to Table </h1>
           
+        
         <h2>Inventory</h2> 
 
-        <AddToInventory data={this.state} handleChange={this.handleChange} handleDateChange={this.handleDateChange} addItem={this.addItem} displayDropdown={this.displayDropdown} />
+        <AddToInventory data={this.state} handleChange={this.handleChange} handleDateChange={this.handleDateChange} addItem={this.addItem} />
 
         <form className="filterBy">
           <h3>Filter By</h3>
@@ -144,13 +191,20 @@ class App extends React.Component {
 
         <ul>
           {this.state.inventory.map((item) => {
-            return <FoodItem data={item} filterBy={this.state.filterBy} key={item.key} removeItem={this.removeItem} />
+            return <FoodItem data={item} filterBy={this.state.filterBy} key={item.key} removeItem={this.removeItem} dbRef={`firebase.database().ref(Drumgolds/inventory/${key})`} />
           })}
         </ul>
-          
+        
+
         <h2>Grocery List</h2> 
 
-          <GroceryListItem />
+        <AddToGroceryList data={this.state} handleChange={this.handleChange} addGroceryItem={this.addGroceryItem} />
+
+        <ul>
+          {this.state.groceryList.map((item) => {
+            return <GroceryListItem data={item} key={item.key} removeGroceryItem={this.removeGroceryItem} />
+          })}
+        </ul>
 
       </div>
     )

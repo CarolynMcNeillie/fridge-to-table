@@ -11,7 +11,7 @@ class FoodCategorySelect extends React.Component {
 
       {FoodCategories.map((category, i) => {
         return (
-          <option value={category} key={`category-${i}`} >{category}</option>
+          <option value={category} key={`foodCategory-${i}`} >{category}</option>
         )
       })
       }

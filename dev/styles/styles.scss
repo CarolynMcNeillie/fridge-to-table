@@ -22,7 +22,7 @@ h2 {
 
 form {
     display: block;
-    margin: 50px 150px 50px;
+    margin: 50px 0 50px;
     padding: 50px;
     border-radius: 10px;
     background: #fefefc;
@@ -33,10 +33,6 @@ form {
     p {
         margin: 0;
     }
-    // .DayPicker-Month {
-    //     margin: 0;
-    //     position: relative;
-    // }
     .DayPicker-Caption div {
         font-size: 0.75rem;
     }
@@ -72,14 +68,14 @@ ul {
     display: grid;
     list-style: none;
     font-weight: 400;
-    margin: 0px 150px 0px 150px;
+    margin: 0;
     padding: 0;
 }
 
 li {
     padding: 15px;
     border-bottom: 1px solid #9b9b92;
-    background-color: #ffffff99;
+    background-color: rgba(255, 255, 255, 0.5);
     order: 1;
     .food {
         font-weight: 600;
