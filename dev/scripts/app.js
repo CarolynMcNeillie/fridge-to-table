@@ -66,7 +66,8 @@ class App extends React.Component {
       this.addGroceryItem = this.addGroceryItem.bind(this);
       this.toggleModal = this.toggleModal.bind(this);
       this.showSidebar = this.showSidebar.bind(this);
-      this.hideSplash = this.hideSplash.bind(this);
+      this.setInventory = this.setInventory.bind(this);
+      this.setGroceries = this.setGroceries.bind(this);
     }
 
   toggleModal(key, itemName, itemCategory) {
@@ -89,9 +90,16 @@ class App extends React.Component {
     });
   }
 
-  hideSplash() {
+  setInventory() {
     this.setState({
       path: 'Inventory'
+    });
+  }
+
+  setGroceries() {
+    console.log('hi')
+    this.setState({
+      path: 'Groceries'
     });
   }
 
@@ -213,6 +221,13 @@ class App extends React.Component {
 
       <div className="App">
 
+        {this.state.path === 'Hero' ?
+          <header className="heroSplash">
+            <h1>Fridge<br /> <span>to</span> Table</h1>
+            <button onClick={this.setInventory}>Enter</button>
+          </header>
+          : null}
+
         <header className="navBar">
           <button onClick={this.showSidebar}><i className="fas fa-bars"></i></button>
           <h2>Fridge to Table</h2>
@@ -233,7 +248,7 @@ class App extends React.Component {
               </section>
             : null}
 
-            {this.state.path === 'GroceryList' ? 
+            {this.state.path === 'Groceries' ? 
               <section className="AddToGroceryList">
                 <AddToGroceryList data={this.state} handleChange={this.handleChange} addGroceryItem={this.addGroceryItem} />
               </section>
@@ -242,13 +257,6 @@ class App extends React.Component {
 
           </div>
         </aside>
-
-        {this.state.path === 'Hero' ?
-            <header className="heroSplash">
-              <h1>Fridge<br/> <span>to</span> Table</h1>
-              <button onClick={this.hideSplash}>Enter</button>
-            </header> 
-          : null}
 
         {this.state.path === 'Inventory' ?
         
@@ -277,20 +285,28 @@ class App extends React.Component {
 
         : null}
 
-        {this.state.path === 'GroceryList' ?
-            <ul>
-              {this.state.groceryList.map((item) => {
-                return <GroceryListItem data={item} key={item.key} removeGroceryItem={this.removeGroceryItem} />
-              })}
-            </ul>
+        {this.state.path === 'Groceries' ?
+            <div>
+            <h1 className="inventory">Grocery List</h1>
+              <ul>
+                {this.state.groceryList.map((item) => {
+                  return <GroceryListItem data={item} key={item.key} removeGroceryItem={this.removeGroceryItem} />
+                })}
+              </ul>
+            </div>
 
         : null }
 
-        {/* <footer className="navBar">
-          <button onClick={this.showSidebar}><i className="fas fa-bars"></i></button>
-          <h2>Fridge to Table</h2>
-          <p> </p>
-        </footer> */}
+        <footer>
+          {/* inventory */}
+          <button onClick={this.setInventory}><i className="fas fa-utensils" ></i></button>
+          
+          {/* grocery list */}
+          <button onClick={this.setGroceries} ><i className="fas fa-shopping-bag" ></i></button>
+          
+          {/* recipes */}
+          <button><i className="fas fa-book"></i></button>
+        </footer>
 
 
       </div>

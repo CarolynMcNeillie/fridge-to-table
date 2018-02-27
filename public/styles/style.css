@@ -178,7 +178,7 @@ h1.inventory {
   font-size: 2rem; }
 
 .heroSplash {
-  background-image: url("../../images/fridge-splash.png");
+  background-image: url("../../images/fridge-splash-2.png");
   background-size: cover;
   background-position: bottom center;
   position: absolute;
@@ -187,13 +187,14 @@ h1.inventory {
   right: 0;
   bottom: 0;
   z-index: 1000;
-  padding: 30px; }
+  padding: 25px; }
   .heroSplash h1 {
     color: #fff;
     text-transform: uppercase;
     font-size: 3rem;
     font-weight: 600;
-    letter-spacing: 2px; }
+    letter-spacing: 2px;
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.336); }
     .heroSplash h1 span {
       text-transform: lowercase;
       letter-spacing: 0; }
@@ -209,6 +210,9 @@ h1.inventory {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 600; }
+    .heroSplash button:hover {
+      background: #454540;
+      color: #59C4EC; }
 
 aside {
   width: 300px;
@@ -239,6 +243,30 @@ header.navBar {
   display: grid;
   grid-template-columns: 50px 1fr 50px; }
 
+footer {
+  height: 68px;
+  margin: 0;
+  background-color: white;
+  color: #fff;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  box-shadow: 0 0 30px rgba(133, 132, 130, 0.26);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  align-content: center; }
+  footer button {
+    border: 0;
+    height: 48px;
+    width: 48px;
+    font-size: 0.8rem;
+    background: #fff;
+    color: #59C4EC;
+    text-align: center; }
+    footer button:hover {
+      color: #000; }
+
 header button,
 aside button {
   border: 0;
@@ -246,7 +274,8 @@ aside button {
   width: 48px;
   font-size: 0.8rem;
   background: #59C4EC;
-  color: #fff; }
+  color: #fff;
+  text-align: center; }
   header button:hover,
   aside button:hover {
     color: #ff0; }
@@ -400,3 +429,20 @@ li {
 
 .cancel {
   background: #9b9b92; }
+
+@media screen and (min-width: 725px) {
+  .heroSplash {
+    background-image: url("../../images/background.png");
+    background-color: #fed23e;
+    display: grid;
+    padding: 0; }
+    .heroSplash h1 {
+      margin: 125px;
+      font-size: 4rem; }
+  ul {
+    width: 80%;
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+    ul li {
+      border: 1px solid rgba(0, 0, 0, 0.1); } }

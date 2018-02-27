@@ -38,7 +38,9 @@ const FoodItem = (props) => {
 
       <p>
       <span className="food">{props.data.foodItem}</span> - 
-       {liClass === 'oldFood' ? `Ready for the compost ${relativeDate}` : `Eat by ${daysFromNow}`}
+       {liClass === 'oldFood' ? `Ready for the compost ${relativeDate} ` : `Eat by ${daysFromNow}`}
+
+        {liClass === 'eatSoon' ? ' ❗️' : null}
        </p>
 
     </li>
