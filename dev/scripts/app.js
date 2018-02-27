@@ -228,7 +228,10 @@ class App extends React.Component {
           : null}
 
         <header className="navBar">
-          <button onClick={this.showSidebar}><i className="fas fa-bars"></i></button>
+          <button onClick={this.showSidebar}>
+          {/* <i className="fas fa-bars"></i> */}
+          +
+          </button>
           <h2>Fridge to Table</h2>
           <p> </p>
         </header>
@@ -287,7 +290,7 @@ class App extends React.Component {
         {this.state.path === 'Groceries' ?
             <div>
             <h1 className="inventory">Grocery List</h1>
-              <ul>
+              <ul className="groceryList">
                 {this.state.groceryList.map((item) => {
                   return <GroceryListItem data={item} key={item.key} removeGroceryItem={this.removeGroceryItem} />
                 })}
@@ -298,13 +301,13 @@ class App extends React.Component {
 
         <footer>
           {/* inventory */}
-          <button onClick={this.setInventory}><i className="fas fa-utensils" ></i></button>
+          <button onClick={this.setInventory}><i className="fas fa-utensils" ></i><span> Kitchen Inventory</span></button>
           
           {/* grocery list */}
-          <button onClick={this.setGroceries} ><i className="fas fa-shopping-bag" ></i></button>
+          <button onClick={this.setGroceries} ><i className="fas fa-shopping-bag" ></i><span> Grocery List</span></button>
           
           {/* recipes */}
-          <button><i className="fas fa-book"></i></button>
+          <button><i className="fas fa-book"></i><span> Recipes</span></button>
         </footer>
 
 

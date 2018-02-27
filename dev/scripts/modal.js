@@ -39,11 +39,11 @@ class Modal extends React.Component {
           <h2>Add this item to your grocery list?</h2>
       
           <div className="buttons">
+            <button onClick={() => { this.addToGroceries(true) }} className="modal-btn yes">
+              Yes
+            </button>
             <button onClick={() => { this.addToGroceries(false) }} className="modal-btn">
                   No
-            </button>
-            <button onClick={() => { this.addToGroceries(true) }} className="modal-btn">
-                Yes
             </button>
             <button onClick={this.props.onClose} className="modal-btn cancel">
               Cancel

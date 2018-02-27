@@ -160,7 +160,7 @@ input::-moz-focus-inner {
   box-sizing: border-box; }
 
 body {
-  background: #cbe1e9;
+  background: #fff;
   font-family: 'Montserrat', sans-serif;
   font-size: 62.5%;
   color: #454540; }
@@ -259,11 +259,16 @@ footer {
   footer button {
     border: 0;
     height: 48px;
-    width: 48px;
+    width: 100%;
     font-size: 0.8rem;
     background: #fff;
     color: #59C4EC;
-    text-align: center; }
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 400; }
+    footer button span {
+      display: none; }
     footer button:hover {
       color: #000; }
 
@@ -272,13 +277,16 @@ aside button {
   border: 0;
   height: 48px;
   width: 48px;
-  font-size: 0.8rem;
+  font-size: 1.5rem;
   background: #59C4EC;
   color: #fff;
   text-align: center; }
   header button:hover,
   aside button:hover {
     color: #ff0; }
+
+.heroSplash button {
+  font-size: 1rem; }
 
 aside .wrapper {
   position: relative; }
@@ -338,13 +346,14 @@ div.menuContainer {
       color: #fefefc; }
 
 .filterBy {
-  background: #454540;
-  color: #fff;
+  background: #fff;
+  color: #454540;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 0; }
+  padding: 0;
+  height: 68px; }
   .filterBy select {
     padding: 15px; }
 
@@ -359,7 +368,7 @@ ul {
 li {
   padding: 15px;
   border-bottom: 1px solid #9b9b92;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: #fff;
   order: 1;
   display: grid;
   grid-template-columns: 60px 1fr; }
@@ -384,13 +393,15 @@ li {
       background: #fff;
       color: #454540; }
 
+.emoji {
+  font-size: 1rem; }
+
 .oldFood {
-  background-color: palevioletred;
-  color: #fff;
+  color: olivedrab;
   order: 3; }
 
 .eatSoon {
-  background-color: #ffffff;
+  color: red;
   order: 0; }
 
 .backdrop {
@@ -408,7 +419,9 @@ li {
   max-width: 500px;
   min-height: 300px;
   margin: 0 auto;
-  padding: 30px; }
+  padding: 30px;
+  display: grid;
+  align-content: center; }
 
 .modal div {
   text-align: center; }
@@ -430,6 +443,9 @@ li {
 .cancel {
   background: #9b9b92; }
 
+.yes {
+  background: #fed23e; }
+
 @media screen and (min-width: 725px) {
   .heroSplash {
     background-image: url("../../images/background.png");
@@ -441,8 +457,25 @@ li {
       font-size: 4rem; }
   ul {
     width: 80%;
-    margin: 30px auto;
+    margin: auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
-    ul li {
-      border: 1px solid rgba(0, 0, 0, 0.1); } }
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-column-gap: 20px; }
+  .groceryList {
+    margin: 50px auto; }
+  .filterBy {
+    width: 90%;
+    justify-content: flex-end; }
+  .yes {
+    width: 270px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto; }
+  header.navBar {
+    padding-left: 10%;
+    padding-right: 10%; }
+  footer {
+    padding-left: 5%;
+    padding-right: 5%; }
+    footer button span {
+      display: inline; } }
