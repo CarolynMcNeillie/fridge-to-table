@@ -187,14 +187,15 @@ h1.inventory {
   right: 0;
   bottom: 0;
   z-index: 1000;
-  padding: 25px; }
+  padding: 50px; }
   .heroSplash h1 {
     color: #fff;
     text-transform: uppercase;
     font-size: 3rem;
     font-weight: 600;
     letter-spacing: 2px;
-    text-shadow: 2px 2px rgba(0, 0, 0, 0.336); }
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.336);
+    margin-top: 0; }
     .heroSplash h1 span {
       text-transform: lowercase;
       letter-spacing: 0; }
@@ -271,6 +272,11 @@ footer {
       display: none; }
     footer button:hover {
       color: #000; }
+    footer button:active, footer button:focus {
+      color: #454540;
+      border: 0;
+      box-shadow: 0;
+      outline: none; }
 
 header button,
 aside button {

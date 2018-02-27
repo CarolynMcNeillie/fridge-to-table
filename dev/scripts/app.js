@@ -136,6 +136,8 @@ class App extends React.Component {
       purchasedDate: 'Today',
       eatBy: ''
     });
+
+    this.showSidebar(e);
   }
     
   //Add item to the grocery list
@@ -154,6 +156,8 @@ class App extends React.Component {
       groceryItem: '',
       groceryCategory: 'Fruits',
     });
+
+    this.showSidebar(e);
   }
 
   //Remove item from the Inventory
@@ -229,8 +233,7 @@ class App extends React.Component {
 
         <header className="navBar">
           <button onClick={this.showSidebar}>
-          {/* <i className="fas fa-bars"></i> */}
-          +
+          <i className="fas fa-bars"></i>
           </button>
           <h2>Fridge to Table</h2>
           <p> </p>
