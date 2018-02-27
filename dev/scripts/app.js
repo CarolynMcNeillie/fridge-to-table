@@ -97,7 +97,6 @@ class App extends React.Component {
   }
 
   setGroceries() {
-    console.log('hi')
     this.setState({
       path: 'Groceries'
     });
