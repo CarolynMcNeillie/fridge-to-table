@@ -38,16 +38,20 @@ class Modal extends React.Component {
 
           <h2>Add this item to your grocery list?</h2>
       
-          <div className="footer">
-            <button onClick={() => {this.addToGroceries(false)}}>
+          <div className="buttons">
+            <button onClick={() => { this.addToGroceries(false) }} className="modal-btn">
                   No
-              </button>
-            <button onClick={() => {this.addToGroceries(true)}}>
+            </button>
+            <button onClick={() => { this.addToGroceries(true) }} className="modal-btn">
                 Yes
-              </button>
+            </button>
+            <button onClick={this.props.onClose} className="modal-btn cancel">
+              Cancel
+            </button>
+          </div>
+
           </div>
         </div>
-      </div>
     );
   }
 }

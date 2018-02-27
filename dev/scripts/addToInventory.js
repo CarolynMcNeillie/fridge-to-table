@@ -8,9 +8,10 @@ const thisMonth = moment().format(`YYYY, M`);
 const AddToInventory = (props) => {
 
   return(
-    <form onSubmit={props.addItem}>
+    <div className="menuContainer">
+    <header><h3>Add to Inventory</h3></header>
 
-      <header><h3>Add to Inventory</h3></header>
+    <form onSubmit={props.addItem}>
 
       <label htmlFor="foodItem">Food Item</label>
       <input type="text" value={props.data.foodItem} name="foodItem" onChange={props.handleChange} required/>
@@ -23,6 +24,7 @@ const AddToInventory = (props) => {
 
       <input type="submit" value="Add" />
     </form>
+    </div>
   );
 };
 

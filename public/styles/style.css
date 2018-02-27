@@ -165,6 +165,51 @@ body {
   font-size: 62.5%;
   color: #454540; }
 
+.heroSplash {
+  background-image: url("../../images/fridge-splash.png");
+  background-size: cover;
+  background-position: bottom center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  padding: 30px; }
+  .heroSplash h1 {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: 2px; }
+    .heroSplash h1 span {
+      text-transform: lowercase;
+      letter-spacing: 0; }
+  .heroSplash button {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 68px;
+    background: #59C4EC;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600; }
+
+aside {
+  width: 300px;
+  min-height: 600px;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  left: -300px;
+  transition: all 0.4s linear; }
+  aside.open {
+    left: 0;
+    box-shadow: 0 0 30px rgba(133, 132, 130, 0.26); }
+
 div.App {
   margin: 0;
   padding: 68px 0px 0px; }
@@ -182,9 +227,26 @@ header.navBar {
   flex-direction: row;
   justify-content: space-between; }
 
+header button,
+aside button {
+  border: 0;
+  height: 48px;
+  width: 48px;
+  font-size: 0.8rem;
+  background: #cbe1e9; }
+
+aside .wrapper {
+  position: relative; }
+  aside .wrapper button {
+    position: absolute;
+    top: 20px;
+    right: 0px;
+    font-size: 1.5rem; }
+
 h1,
 h2 {
-  text-align: center; }
+  text-align: center;
+  line-height: 1.5em; }
 
 h1 {
   margin-top: 50px; }
@@ -194,23 +256,22 @@ h2 {
   letter-spacing: 1px;
   font-size: 0.8rem; }
 
-form {
-  display: block;
+div.menuContainer {
   padding: 50px;
-  background: #fefefc;
-  box-shadow: 0 0 50px rgba(133, 132, 130, 0.753);
+  background: #fff;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px; }
-  form p {
+  letter-spacing: 1px;
+  border-bottom: 1px solid #9b9b92; }
+  div.menuContainer p {
     margin: 0; }
-  form .DayPicker-Caption div {
+  div.menuContainer .DayPicker-Caption div {
     font-size: 0.75rem; }
-  form .DayPicker-Day--today {
+  div.menuContainer .DayPicker-Day--today {
     background-color: #454540;
     color: #fff; }
-  form input,
-  form select {
+  div.menuContainer input,
+  div.menuContainer select {
     display: block;
     margin: 10px 0px 30px;
     padding: 10px;
@@ -218,19 +279,30 @@ form {
     letter-spacing: 0;
     font-weight: 400;
     color: #9b9b92; }
-    form input:required, form input:required:focus,
-    form select:required,
-    form select:required:focus {
+    div.menuContainer input:required, div.menuContainer input:required:focus,
+    div.menuContainer select:required,
+    div.menuContainer select:required:focus {
       box-shadow: none; }
-  form input[type="submit"] {
+  div.menuContainer input[type="submit"] {
     border: 0;
     background-color: #cbe1e9;
     color: #454540;
     padding: 10px 50px;
     transition: all 0.4s ease-out; }
-    form input[type="submit"]:hover {
+    div.menuContainer input[type="submit"]:hover {
       background-color: #454540;
       color: #fefefc; }
+
+.filterBy {
+  background: #454540;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0; }
+  .filterBy select {
+    padding: 15px; }
 
 ul {
   text-align: left;
@@ -251,16 +323,17 @@ li {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px; }
-  li p {
+  li p,
+  li .food {
     align-self: center; }
   li button {
     width: 40px;
     height: 40px;
     border: 0;
     margin-right: 15px;
-    background-color: #454540;
-    color: white;
-    font-size: 1.25rem;
+    background-color: rgba(255, 255, 255, 0);
+    color: #454540;
+    font-size: 1.5rem;
     transition: all 0.4s ease-out;
     align-self: center; }
     li button:hover, li button:focus {
@@ -282,7 +355,7 @@ li {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.7);
   padding: 50px; }
 
 .modal {
@@ -293,5 +366,22 @@ li {
   margin: 0 auto;
   padding: 30px; }
 
+.modal div {
+  text-align: center; }
+
+.buttons {
+  margin-top: 20px; }
+
 .modal-btn {
-  font-size: 1rem; }
+  padding: 15px;
+  background-color: #cbe1e9;
+  border: 0;
+  width: 130px;
+  height: 40px;
+  margin: 5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px; }
+
+.cancel {
+  background: #9b9b92; }

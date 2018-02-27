@@ -40,7 +40,7 @@ class App extends React.Component {
       const today = moment().format('YYYYMMDD')
 
       this.state = {
-        path: 'Inventory',
+        path: 'Hero',
         foodItem: '',
         foodCategory: 'Fruits',
         purchasedDate: today,
@@ -54,6 +54,7 @@ class App extends React.Component {
         activeItem: '',
         activeItemName: '',
         activeCategory: '',
+
       }
 
       this.handleChange = this.handleChange.bind(this);
@@ -64,6 +65,8 @@ class App extends React.Component {
       this.removeGroceryItem = this.removeGroceryItem.bind(this);
       this.addGroceryItem = this.addGroceryItem.bind(this);
       this.toggleModal = this.toggleModal.bind(this);
+      this.showSidebar = this.showSidebar.bind(this);
+      this.hideSplash = this.hideSplash.bind(this);
     }
 
   toggleModal(key, itemName, itemCategory) {
@@ -75,9 +78,20 @@ class App extends React.Component {
     });
   }
 
+  showSidebar(e) {
+    e.preventDefault();
+    this.sidebar.classList.toggle("open");
+  }
+
   showGroceryModel(key) {
     this.setState({
       isOpen: !this.state.isOpen
+    });
+  }
+
+  hideSplash() {
+    this.setState({
+      path: 'Inventory'
     });
   }
 
@@ -198,54 +212,69 @@ class App extends React.Component {
     return (
 
       <div className="App">
+
         <header className="navBar">
-          <p><i className="fas fa-bars"></i></p>
+          <button onClick={this.showSidebar}><i className="fas fa-bars"></i></button>
           <h2>Fridge to Table</h2>
-          <p>❤️</p>
+          <p> </p>
         </header>
 
         <Modal show={this.state.isOpen}
           onClose={this.toggleModal} removeItem={this.removeItem} activeItem={this.state.activeItem} activeItemName={this.state.activeItemName} activeCategory={this.state.activeCategory} >
         </Modal>
 
-        <aside className="sidebar">
-          <section className="AddToInventory">
-          <AddToInventory data={this.state} handleChange={this.handleChange} handleDateChange={this.handleDateChange} addItem={this.addItem} />
-          </section>
+        <aside className="sidebar" ref={ref => this.sidebar = ref}>
+          <div className="wrapper">
+            <button onClick={this.showSidebar}>×</button>
+            <section className="AddToInventory">
+              <AddToInventory data={this.state} handleChange={this.handleChange} handleDateChange={this.handleDateChange} addItem={this.addItem} />
+            </section>
 
-          <section className="AddToGroceryList">
-          <AddToGroceryList data={this.state} handleChange={this.handleChange} addGroceryItem={this.addGroceryItem} />
-          </section>
-
+            <section className="AddToGroceryList">
+              <AddToGroceryList data={this.state} handleChange={this.handleChange} addGroceryItem={this.addGroceryItem} />
+            </section>
+          </div>
         </aside>
+
+        {this.state.path === 'Hero' ?
+            <header className="heroSplash">
+              <h1>Fridge<br/> <span>to</span> Table</h1>
+              <button onClick={this.hideSplash}>Enter</button>
+            </header> 
+          : null}
+
+        {this.state.path === 'Inventory' ?
         
-        <form className="filterBy">
-          <h3>Filter By</h3>
+            <div>
+              <form className="filterBy">
+                <h3>Filter By</h3>
+                <select name="filterBy" onChange={this.handleChange}>
+                <option value="All" key='filter-All' >All</option>
+                
+                {FoodCategories.map((category, i) => {
+                    return <option value={category} key={`filter-${i}`} >{category}</option>
+                })}
 
-          <select name="filterBy" onChange={this.handleChange} >
+                </select>
+                </form>
 
-          <option value="All" key='filter-All' >All</option>
-          
-          {FoodCategories.map((category, i) => {
-              return <option value={category} key={`filter-${i}`} >{category}</option>
-          })}
+              <ul>
+                {this.state.inventory.map((item) => {
+                  return <FoodItem data={item} filterBy={this.state.filterBy} key={item.key} removeItem={this.removeItem} toggleModal={this.toggleModal} />
+                })}
+              </ul>
+            </div>
 
-          </select>
-          
-          </form>
+        : null}
 
-        <ul>
-          {this.state.inventory.map((item) => {
-            return <FoodItem data={item} filterBy={this.state.filterBy} key={item.key} removeItem={this.removeItem} toggleModal={this.toggleModal} />
-          })}
-        </ul>
+        {this.state.path === 'GroceryList' ?
+            <ul>
+              {this.state.groceryList.map((item) => {
+                return <GroceryListItem data={item} key={item.key} removeGroceryItem={this.removeGroceryItem} />
+              })}
+            </ul>
 
-
-        <ul>
-          {this.state.groceryList.map((item) => {
-            return <GroceryListItem data={item} key={item.key} removeGroceryItem={this.removeGroceryItem} />
-          })}
-        </ul>
+        : null }
 
       </div>
     )

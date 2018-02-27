@@ -6,6 +6,57 @@ body {
     color: #454540;
 }
 
+.heroSplash {
+    background-image: url("../../images/fridge-splash.png");
+    background-size: cover;
+    background-position: bottom center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    padding: 30px;
+    h1 {
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 3rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        span {
+            text-transform: lowercase;
+            letter-spacing: 0;
+        }
+    }
+    button {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 68px;
+        background: #59C4EC;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+    }
+}
+
+aside {
+    width: 300px;
+    min-height: 600px;
+    background: #fff;
+    position: absolute;
+    top: 0;
+    left: -300px;
+    transition: all 0.4s linear;
+    &.open {
+        left: 0;
+        box-shadow: 0 0 30px rgba(133, 132, 130, 0.26);
+    }
+}
+
 div.App {
     margin: 0;
     padding: 68px 0px 0px;
@@ -25,9 +76,31 @@ header.navBar {
     justify-content: space-between;
 }
 
+header button,
+aside button {
+    border: 0;
+    height: 48px;
+    width: 48px;
+    font-size: 0.8rem;
+    background: #cbe1e9;
+}
+
+aside {
+    .wrapper {
+        position: relative;
+        button {
+            position: absolute;
+            top: 20px;
+            right: 0px;
+            font-size: 1.5rem;
+        }
+    }
+}
+
 h1,
 h2 {
     text-align: center;
+    line-height: 1.5em;
 }
 
 h1 {
@@ -40,15 +113,14 @@ h2 {
     font-size: 0.8rem;
 }
 
-form {
-    display: block;
-    ;
+div.menuContainer {
     padding: 50px;
-    background: #fefefc;
-    box-shadow: 0 0 50px rgba(133, 132, 130, 0.753);
+    background: #fff;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
+    border-bottom: 1px solid #9b9b92;
+    ;
     p {
         margin: 0;
     }
@@ -86,6 +158,25 @@ form {
     }
 }
 
+// form {
+//     display: none;
+//     &.open {
+//         display: block;
+//     }
+// }
+.filterBy {
+    background: #454540;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    select {
+        padding: 15px;
+    }
+}
+
 ul {
     text-align: left;
     display: grid;
@@ -107,7 +198,8 @@ li {
         text-transform: uppercase;
         letter-spacing: 1px;
     }
-    p {
+    p,
+    .food {
         align-self: center;
     }
     button {
@@ -115,9 +207,9 @@ li {
         height: 40px;
         border: 0;
         margin-right: 15px;
-        background-color: #454540;
-        color: white;
-        font-size: 1.25rem;
+        background-color: rgba(255, 255, 255, 0);
+        color: #454540;
+        font-size: 1.5rem;
         transition: all 0.4s ease-out;
         align-self: center;
         &:hover,
@@ -146,7 +238,7 @@ li {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.7);
     padding: 50px;
 }
 
@@ -160,6 +252,26 @@ li {
     padding: 30px;
 }
 
+.modal div {
+    text-align: center;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
 .modal-btn {
-    font-size: 1rem;
+    padding: 15px;
+    background-color: #cbe1e9;
+    border: 0;
+    width: 130px;
+    height: 40px;
+    margin: 5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cancel {
+    background: #9b9b92;
 }

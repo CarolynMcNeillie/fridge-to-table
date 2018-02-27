@@ -4,9 +4,13 @@ import FoodCategories from './foodCategories';
 const AddToGroceryList = (props) => {
 
   return (
+
+    <div className="menuContainer">
+
+    < h3 > Add to Grocery List</h3 >
     <form onSubmit={props.addGroceryItem}>
 
-      <h3>Add to Grocery List</h3>
+      
 
       <label htmlFor="groceryItem">Food Item</label>
       <input type="text" value={props.data.groceryItem} name="groceryItem" onChange={props.handleChange} required/>
@@ -25,6 +29,7 @@ const AddToGroceryList = (props) => {
 
       <input type="submit" value="Add" />
     </form>
+    </div>
   );
 };
 
