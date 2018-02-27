@@ -165,6 +165,18 @@ body {
   font-size: 62.5%;
   color: #454540; }
 
+h1.inventory {
+  background-image: url("../../images/InventorySplash.png");
+  background-size: cover;
+  margin: 0;
+  height: 150px;
+  color: #fff;
+  line-height: 150px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 3px 3px #000;
+  font-size: 2rem; }
+
 .heroSplash {
   background-image: url("../../images/fridge-splash.png");
   background-size: cover;
@@ -212,20 +224,20 @@ aside {
 
 div.App {
   margin: 0;
-  padding: 68px 0px 0px; }
+  padding: 68px 0px; }
 
 header.navBar {
   height: 68px;
   margin: 0;
   padding: 20px 20px 0px 20px;
-  background-color: #fff;
+  background-color: #59C4EC;
+  color: #fff;
   position: fixed;
   width: 100%;
   top: 0;
   box-shadow: 0 0 30px rgba(133, 132, 130, 0.26);
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between; }
+  display: grid;
+  grid-template-columns: 50px 1fr 50px; }
 
 header button,
 aside button {
@@ -233,7 +245,11 @@ aside button {
   height: 48px;
   width: 48px;
   font-size: 0.8rem;
-  background: #cbe1e9; }
+  background: #59C4EC;
+  color: #fff; }
+  header button:hover,
+  aside button:hover {
+    color: #ff0; }
 
 aside .wrapper {
   position: relative; }
@@ -261,8 +277,7 @@ div.menuContainer {
   background: #fff;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  border-bottom: 1px solid #9b9b92; }
+  letter-spacing: 1px; }
   div.menuContainer p {
     margin: 0; }
   div.menuContainer .DayPicker-Caption div {
@@ -332,7 +347,7 @@ li {
     border: 0;
     margin-right: 15px;
     background-color: rgba(255, 255, 255, 0);
-    color: #454540;
+    color: #59C4EC;
     font-size: 1.5rem;
     transition: all 0.4s ease-out;
     align-self: center; }

@@ -1,9 +1,23 @@
 @import "setup";
+@import "variables";
 body {
     background: #cbe1e9;
     font-family: 'Montserrat', sans-serif;
     font-size: 62.5%;
     color: #454540;
+}
+
+h1.inventory {
+    background-image: url("../../images/InventorySplash.png");
+    background-size: cover;
+    margin: 0;
+    height: 150px;
+    color: #fff;
+    line-height: 150px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 3px 3px #000;
+    font-size: 2rem;
 }
 
 .heroSplash {
@@ -35,7 +49,7 @@ body {
         right: 0;
         width: 100%;
         height: 68px;
-        background: #59C4EC;
+        background: $accent-color;
         color: #fff;
         text-transform: uppercase;
         letter-spacing: 1px;
@@ -59,21 +73,21 @@ aside {
 
 div.App {
     margin: 0;
-    padding: 68px 0px 0px;
+    padding: 68px 0px;
 }
 
 header.navBar {
     height: 68px;
     margin: 0;
     padding: 20px 20px 0px 20px;
-    background-color: #fff;
+    background-color: $accent-color;
+    color: #fff;
     position: fixed;
     width: 100%;
     top: 0;
     box-shadow: 0 0 30px rgba(133, 132, 130, 0.26);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 50px 1fr 50px;
 }
 
 header button,
@@ -82,7 +96,11 @@ aside button {
     height: 48px;
     width: 48px;
     font-size: 0.8rem;
-    background: #cbe1e9;
+    background: $accent-color;
+    color: #fff;
+    &:hover {
+        color: #ff0;
+    }
 }
 
 aside {
@@ -119,7 +137,6 @@ div.menuContainer {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border-bottom: 1px solid #9b9b92;
     ;
     p {
         margin: 0;
@@ -158,12 +175,6 @@ div.menuContainer {
     }
 }
 
-// form {
-//     display: none;
-//     &.open {
-//         display: block;
-//     }
-// }
 .filterBy {
     background: #454540;
     color: #fff;
@@ -208,7 +219,7 @@ li {
         border: 0;
         margin-right: 15px;
         background-color: rgba(255, 255, 255, 0);
-        color: #454540;
+        color: $accent-color;
         font-size: 1.5rem;
         transition: all 0.4s ease-out;
         align-self: center;

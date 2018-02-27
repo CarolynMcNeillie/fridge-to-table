@@ -226,13 +226,20 @@ class App extends React.Component {
         <aside className="sidebar" ref={ref => this.sidebar = ref}>
           <div className="wrapper">
             <button onClick={this.showSidebar}>×</button>
-            <section className="AddToInventory">
-              <AddToInventory data={this.state} handleChange={this.handleChange} handleDateChange={this.handleDateChange} addItem={this.addItem} />
-            </section>
 
-            <section className="AddToGroceryList">
-              <AddToGroceryList data={this.state} handleChange={this.handleChange} addGroceryItem={this.addGroceryItem} />
-            </section>
+            {this.state.path === 'Inventory' ? 
+              <section className="AddToInventory">
+                <AddToInventory data={this.state} handleChange={this.handleChange} handleDateChange={this.handleDateChange} addItem={this.addItem} />
+              </section>
+            : null}
+
+            {this.state.path === 'GroceryList' ? 
+              <section className="AddToGroceryList">
+                <AddToGroceryList data={this.state} handleChange={this.handleChange} addGroceryItem={this.addGroceryItem} />
+              </section>
+            : null}
+
+
           </div>
         </aside>
 
@@ -246,6 +253,9 @@ class App extends React.Component {
         {this.state.path === 'Inventory' ?
         
             <div>
+
+              <h1 className="inventory">Inventory</h1>
+
               <form className="filterBy">
                 <h3>Filter By</h3>
                 <select name="filterBy" onChange={this.handleChange}>
@@ -275,6 +285,13 @@ class App extends React.Component {
             </ul>
 
         : null }
+
+        {/* <footer className="navBar">
+          <button onClick={this.showSidebar}><i className="fas fa-bars"></i></button>
+          <h2>Fridge to Table</h2>
+          <p> </p>
+        </footer> */}
+
 
       </div>
     )
